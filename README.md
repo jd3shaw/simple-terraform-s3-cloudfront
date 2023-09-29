@@ -1,70 +1,85 @@
-Simple Terraform for hosting an S3 Static Website via Cloudfront (Route53 included)
-This project provides a simple Terraform configuration for hosting an S3 static website via Cloudfront. It also includes a Makefile with targets for initializing, validating, planning, applying, and destroying the Terraform configuration.
+# Terraform Configuration for Hosting an S3 Static Website via Cloudfront
 
-To use this project, you will need to have Terraform and the AWS CLI installed. You can install Terraform using the following command:
+This project provides a simple Terraform configuration for hosting a static website on Amazon S3, distributing it through Amazon CloudFront, and configuring a Route 53 DNS entry for the website. With minimal setup, you can deploy your static website to a highly available and scalable infrastructure on AWS.
 
-curl -fsSL https://releases.hashicorp.com/terraform/0.15.5/terraform_0.15.5_linux_amd64.zip -o terraform.zip
-unzip terraform.zip
-rm terraform.zip
-chmod +x terraform
-sudo mv terraform /usr/local/bin/
+## Prerequisites
 
-You can install the AWS CLI using the following command:
+Before you begin, ensure you have the following prerequisites in place:
 
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-rm -r aws awscliv2.zip
-Once you have Terraform and the AWS CLI installed, you can clone this repository and configure the Terraform configuration for your project. To do this, run the following commands:
+1. [Terraform](https://www.terraform.io/) installed on your local machine.
+2. AWS CLI configured with your AWS credentials.
 
-git clone https://github.com/example/simple-terraform-s3-cloudfront.git
-cd simple-terraform-s3-cloudfront
-The Terraform configuration for this project is defined in the terraform directory. To configure the Terraform configuration, you will need to create an env.tfvars file and define the following variables:
+## Getting Started
 
-domain_name: The domain name for your website.
-certificate_arn: The ARN of the ACM certificate for your domain name.
-You can create the env.tfvars file using the following command:
+Follow these steps to set up and deploy your static website:
 
-touch terraform/env.tfvars
-Once you have created the env.tfvars file, you can open it in a text editor and define the required variables.
+### 1. Clone the Repository
 
-Once you have configured the Terraform configuration, you can initialize, validate, plan, and apply the Terraform configuration using the following Makefile targets:
+Clone this repository to your local machine:
 
-init: Initializes the Terraform configuration.
-validate: Validates the Terraform configuration.
-plan: Outputs a plan of the changes that Terraform will make to your infrastructure.
-apply: Applies the Terraform configuration to your infrastructure.
-To initialize the Terraform configuration, run the following command:
+```bash
+git clone <repository_url>
+cd <repository_directory>
+```
 
+### 2. Initialize Your Project
+
+Run the following command to initialize your Terraform project:
+
+```bash
+make setup
+```
+
+This will try to install terraform and awscli as well as get you to configure it. You can skip this if you already have these installed and setup or you want to do it manually.
+
+### 3. Initialize Terraform
+
+Run the following command to initialize Terraform and download the required providers:
+
+```bash
 make init
-To validate the Terraform configuration, run the following command:
+```
 
+### 4. Validate Your Configuration
+
+Validate your Terraform configuration to ensure there are no errors:
+
+```bash
 make validate
-To plan the changes that Terraform will make to your infrastructure, run the following command:
+```
 
+### 5. Plan Your Deployment
+
+Generate an execution plan to review the changes that will be applied:
+
+```bash
 make plan
-To apply the Terraform configuration to your infrastructure, run the following command:
+```
 
+Review the plan to ensure it aligns with your expectations.
+
+### 6. Apply Your Configuration
+
+Apply the Terraform configuration to create your AWS resources:
+
+```bash
 make apply
-Once you have applied the Terraform configuration, your S3 static website will be hosted via Cloudfront. You can access your website by visiting the domain name that you specified in the env.tfvars file.
+```
 
-Makefile targets
-The following is a list of the Makefile targets for this project:
+Terraform will prompt you to confirm the changes. Type `yes` to proceed with the deployment.
 
-init: Initializes the Terraform configuration.
-validate: Validates the Terraform configuration.
-plan: Outputs a plan of the changes that Terraform will make to your infrastructure.
-apply: Applies the Terraform configuration to your infrastructure.
-destroy: Destroys the Terraform configuration.
-deploy: Validates the Terraform configuration, outputs a plan of the changes, and applies the changes to the infrastructure.
-list: Lists the resources that are managed by the Terraform configuration.
-configure: Allows you to configure the domain name for your website.
-setup: Installs Terraform and the AWS CLI, and configures the AWS CLI.
-Aliases
-The following are aliases for the Makefile targets:
+## Clean Up
 
-v: validate
-p: plan
-a: apply
-Conclusion
-This project provides a simple Terraform configuration for hosting an S3 static website via Cloudfront. It also includes a Makefile with targets for initializing, validating, planning, applying, and destroying the Terraform configuration.
+To destroy the infrastructure and remove all resources, run:
+
+```bash
+make destroy
+```
+
+## Contributing
+
+If you find issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
