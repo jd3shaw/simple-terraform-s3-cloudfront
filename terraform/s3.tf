@@ -16,6 +16,8 @@ resource "aws_s3_object" "website_files" {
   source = "websitecode/${each.value}"
   tags   = local.common_tags
 
+  etag = filemd5("../websitecode/${each.value}")
+
   content_type = lookup({
     ".html"        = "text/html",
     ".css"         = "text/css",
