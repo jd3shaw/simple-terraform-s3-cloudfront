@@ -1,0 +1,49 @@
+#https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53domains_registered_domain
+resource "aws_route53domains_registered_domain" "example_com" {
+  domain_name = var.domain_name
+
+  admin_contact {
+    first_name = "John"
+    last_name  = "Doe"
+    email      = "john.doe@example.com"
+    phone_number = "+15555555555"
+    address_line_1 = "123 Main Street"
+    city = "Anytown"
+    state = "CA"
+    zip_code = "91234"
+    country_code = "US"
+  }
+
+  registrant_contact {
+    first_name = "John"
+    last_name  = "Doe"
+    email      = "john.doe@example.com"
+    phone_number = "+15555555555"
+    address_line_1 = "123 Main Street"
+    city = "Anytown"
+    state = "CA"
+    zip_code = "91234"
+    country_code = "US"
+  }
+
+  tech_contact {
+    first_name = "John"
+    last_name  = "Doe"
+    email      = "john.doe@example.com"
+    phone_number = "+15555555555"
+    address_line_1 = "123 Main Street"
+    city = "Anytown"
+    state = "CA"
+    zip_code = "91234"
+    country_code = "US"
+  }
+  dynamic "name_server" {
+    for_each = aws_route53_zone.main.name_servers
+    content {
+      name = name_server.value
+    }
+  }
+  auto_renew = true
+  tags = local.common_tags
+
+}
