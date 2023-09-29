@@ -13,7 +13,7 @@ resource "aws_s3_object" "website_files" {
 
   bucket = aws_s3_bucket.website_bucket.id
   key    = each.value
-  source = "websitecode/${each.value}"
+  source = "../websitecode/${each.value}"
   tags   = local.common_tags
 
   etag = filemd5("../websitecode/${each.value}")
